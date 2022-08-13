@@ -30,7 +30,7 @@ const FilterArea = ({
     setEmployeeData(data);
   };
   return (
-    <div className="flex flex-nowrap flex-col justify-between items-start mx-4">
+    <div className="flex flex-nowrap flex-col lg:flex-row justify-between items-start mx-4 lg:items-center">
       <form className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Filter by name:
