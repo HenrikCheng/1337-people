@@ -3,7 +3,7 @@ import axios from "axios";
 import useSWR from "swr";
 
 import "./App.css";
-import EmployeeGrid from "./components/EmployeeGrid";
+import EmployeesDisplay from "./components/EmployeesDisplay";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
 
@@ -24,6 +24,7 @@ function App() {
   const [filterOffice, setFilterOffice] = useState("All");
   const [filterName, setFilterName] = useState("");
   const [sortMode, setSortMode] = useState("nameDescending");
+  const [showList, setShowList] = useState();
 
   useEffect(() => {
     if (data) {
@@ -64,8 +65,18 @@ function App() {
         setSortMode={setSortMode}
         setEmployeeData={setEmployeeData}
         data={data}
+        showList={showList}
+        setShowList={setShowList}
       />
-      {data ? <EmployeeGrid data={employeeData} /> : <Loader />}
+      {data ? (
+        <EmployeesDisplay
+          data={employeeData}
+          showList={showList}
+          setShowList={showList}
+        />
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 }

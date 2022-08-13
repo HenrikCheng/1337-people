@@ -8,22 +8,23 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import PropTypes from "prop-types";
 
-// import ModalCard from "./ModalCard";
-
 const EmployeeCard = ({ person }) => {
-  // const [showModal, setShowModal] = useState();
+  const [showModal, setShowModal] = useState();
   return (
     <div className="bg-white shadow-xl rounded-lg flex flex-col justify-end hover:-translate-y-1 duration-300 ease-in-out">
-      {/* {showModal && (
-        <div className="static z-10">
-          <img src={person.imageWallOfLeetUrl} />
+      {showModal && (
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <img
+            src={person.imageWallOfLeetUrl}
+            alt="employee modal presentation"
+          />
           {person.mainText}
         </div>
-      )} */}
+      )}
       <button
         className="flex flex-col"
         type="button"
-        // onClick={() => setShowModal(!showModal)}
+        onClick={() => setShowModal(true)}
       >
         {person.imagePortraitUrl ? (
           <img
@@ -34,8 +35,8 @@ const EmployeeCard = ({ person }) => {
         ) : (
           <FontAwesomeIcon icon={faUser} className="w-full h-full bg-white" />
         )}
-        <div className="flex flex-col lg:flex-row justify-between p-4 h-28">
-          <div>
+        <div className="flex flex-col w-full lg:flex-row justify-between p-4 h-28">
+          <div className="flex flex-col items-start">
             <h3>{person.name}</h3>
             <p>Office: {person.office}</p>
           </div>
