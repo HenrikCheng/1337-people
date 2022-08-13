@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 
 import "./App.css";
 import EmployeeGrid from "./components/EmployeeGrid";
 import FilterArea from "./components/FilterArea";
+import Loader from "./components/Loader";
 
 function App() {
   const fetcher = (url) =>
@@ -19,6 +20,31 @@ function App() {
 
   const { data, error } = useSWR("https://api.1337co.de/v3/employees", fetcher);
 
+  const [employeeData, setEmployeeData] = useState([]);
+  const [filterOffice, setFilterOffice] = useState("All");
+  const [filterName, setFilterName] = useState("");
+  const [sortMode, setSortMode] = useState("nameDescending");
+
+  useEffect(() => {
+    if (data) {
+      if (filterOffice === "All") {
+        setEmployeeData(
+          data.filter((person) =>
+            person.name.toLowerCase().includes(filterName.toLowerCase())
+          )
+        );
+      } else {
+        setEmployeeData(
+          data
+            .filter((person) =>
+              person.name.toLowerCase().includes(filterName.toLowerCase())
+            )
+            .filter((person) => person.office === filterOffice)
+        );
+      }
+    }
+  }, [data, filterName, filterOffice, sortMode]);
+
   if (error) {
     console.log(error.toString());
     return (
@@ -29,13 +55,17 @@ function App() {
     );
   }
 
-  if (!data) return <div>loading...</div>;
-
   return (
     <div className="bg-gray-100 p-4 pt-10">
-      <h1 className="text-2xl bold px-4">The fellowship of the tretton37</h1>
-      <FilterArea />
-      <EmployeeGrid data={data} />
+      <h1 className="text-3xl bold px-4">The fellowship of the tretton37</h1>
+      <FilterArea
+        setFilterName={setFilterName}
+        setFilterOffice={setFilterOffice}
+        setSortMode={setSortMode}
+        setEmployeeData={setEmployeeData}
+        data={data}
+      />
+      {data ? <EmployeeGrid data={employeeData} /> : <Loader />}
     </div>
   );
 }
