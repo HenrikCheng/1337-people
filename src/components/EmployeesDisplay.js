@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import EmployeeCard from "./EmployeeCard";
 
-const EmployeesDisplay = ({ data, showList, setShowList }) => {
+const EmployeesDisplay = ({ data, showList }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 p-4">
       {showList
@@ -19,7 +19,8 @@ const EmployeesDisplay = ({ data, showList, setShowList }) => {
 };
 
 EmployeesDisplay.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
+  showList: PropTypes.bool,
 };
 
 export default EmployeesDisplay;

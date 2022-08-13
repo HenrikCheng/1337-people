@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 
 import "./App.css";
 import EmployeesDisplay from "./components/EmployeesDisplay";
@@ -49,8 +51,9 @@ function App() {
   if (error) {
     console.log(error.toString());
     return (
-      <div>
-        <h2>Oops, something went wrong.</h2>
+      <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
+        <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
+        <h2 className="bold">Oops, something went wrong.</h2>
         <p>Try reloading the page...</p>
       </div>
     );
@@ -58,7 +61,7 @@ function App() {
 
   return (
     <div className="bg-gray-100 p-4 pt-10">
-      <h1 className="text-3xl bold px-4">The fellowship of the tretton37</h1>
+      <h1 className="text-3xl bold mb-8 mx-4">The fellowship of the tretton37</h1>
       <FilterArea
         setFilterName={setFilterName}
         setFilterOffice={setFilterOffice}

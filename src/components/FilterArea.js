@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faTable } from "@fortawesome/free-solid-svg-icons";
 
@@ -29,8 +30,8 @@ const FilterArea = ({
     setEmployeeData(data);
   };
   return (
-    <div className="m-4 flex flex-nowrap flex-row justify-between items-center">
-      <form className="flex flex-nowrap flex-row justify-between space-x-4">
+    <div className="flex flex-nowrap flex-col justify-between items-start mx-4">
+      <form className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Filter by name:
           <input
@@ -66,7 +67,7 @@ const FilterArea = ({
           </select>
         </label>
       </form>
-      <button onClick={() => setShowList(!showList)} className="fa-xl pt-3">
+      <button onClick={() => setShowList(!showList)} className="fa-xl py-3">
         {showList ? (
           <FontAwesomeIcon icon={faList} />
         ) : (
@@ -75,6 +76,16 @@ const FilterArea = ({
       </button>
     </div>
   );
+};
+
+FilterArea.propTypes = {
+  setFilterName: PropTypes.func.isRequired,
+  setFilterOffice: PropTypes.func.isRequired,
+  setSortMode: PropTypes.func.isRequired,
+  setEmployeeData: PropTypes.func.isRequired,
+  data: PropTypes.array,
+  showList: PropTypes.bool,
+  setShowList: PropTypes.func.isRequired,
 };
 
 export default FilterArea;
