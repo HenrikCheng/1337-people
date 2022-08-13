@@ -9,23 +9,9 @@ import {
 import PropTypes from "prop-types";
 
 const EmployeeCard = ({ person }) => {
-  const [showModal, setShowModal] = useState();
   return (
     <div className="bg-white shadow-xl rounded-lg flex flex-col justify-end hover:-translate-y-1 duration-300 ease-in-out">
-      {showModal && (
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-          <img
-            src={person.imageWallOfLeetUrl}
-            alt="employee modal presentation"
-          />
-          {person.mainText}
-        </div>
-      )}
-      <button
-        className="flex flex-col"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
+      <button className="flex flex-col" type="button">
         {person.imagePortraitUrl ? (
           <img
             src={person.imagePortraitUrl}
