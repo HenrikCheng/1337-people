@@ -22,7 +22,7 @@ const EmployeeCard = ({ person }) => {
         ) : (
           <FontAwesomeIcon
             icon={faUser}
-            className="w-full h-full bg-white lg:pb-2"
+            className="w-full h-auto bg-white"
           />
         )}
         <div className="flex flex-col w-full lg:flex-row justify-between p-4 h-28">
