@@ -21,7 +21,7 @@ const EmployeeCard = ({ person }) => {
         ) : (
           <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
         )}
-        <div className="flex flex-col w-full lg:flex-row justify-between p-4 h-28">
+        <div className="flex flex-col w-full lg:flex-row justify-between p-4">
           <div className="flex flex-col items-start">
             <h3>{person.name}</h3>
             <p>Office: {person.office}</p>

@@ -67,11 +67,24 @@ const FilterArea = ({
           </select>
         </label>
       </form>
-      <button onClick={() => setShowList(!showList)} className="fa-xl py-3">
+      <button
+        onClick={() => setShowList(!showList)}
+        className="fa-xl py-3 flex"
+      >
         {showList ? (
-          <FontAwesomeIcon icon={faList} />
+          <div className="flex flex-col items-end">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Toggle view mode
+            </label>
+            <FontAwesomeIcon icon={faList} />
+          </div>
         ) : (
-          <FontAwesomeIcon icon={faTable} />
+          <div className="flex flex-col items-end">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Toggle view mode
+            </label>
+            <FontAwesomeIcon icon={faTable} />
+          </div>
         )}
       </button>
     </div>
