@@ -26,7 +26,13 @@ const EmployeeCard = ({ person }) => {
             <h3>{person.name}</h3>
             <p>Office: {person.office}</p>
           </div>
-          <div className="space-x-2 py-2 flex flex-nowrap">
+          <div
+            className={`flex flex-nowrap space-x-2 ${
+              !person.twitter && !person.gitHub && !person.linkedIn
+                ? "py-5"
+                : "py-2"
+            }`}
+          >
             {person.linkedIn && (
               <a href={`https://linkedIn.com/${person.linkedIn}`}>
                 <FontAwesomeIcon
@@ -50,10 +56,6 @@ const EmployeeCard = ({ person }) => {
                   className="fa-xl hover:text-gray-500"
                 />
               </a>
-            )}
-
-            {!person.twitter && !person.gitHub && !person.linkedIn && (
-              <div className="h-6" />
             )}
           </div>
         </div>
