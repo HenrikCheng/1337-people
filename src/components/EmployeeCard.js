@@ -51,6 +51,10 @@ const EmployeeCard = ({ person }) => {
                 />
               </a>
             )}
+
+            {!person.twitter && !person.gitHub && !person.linkedIn && (
+              <div className="h-6" />
+            )}
           </div>
         </div>
       </div>
