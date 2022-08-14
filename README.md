@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+Hej och välkomna,
+Jag vet inte vilket språk ni föredrar så hädanefter så skriver jag på engelska.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Greeting and welcome,
+Who am I?
+My name is Henrik Cheng and this is my assignment for Tretton37.
 
-In the project directory, you can run:
 
-### `npm start`
+What does the product do?
+Using this product, you are able to see, sort and filter all the employees at your company.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Thoughts about the design?
+My idea when making this was to make it simple, light weight, and easy to build upon. App.js contains the api-call and renders the component which receives props from their parent components.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Which packages did you use and why?
+TailwindCSS - In order to make an attractive webpage fast, that can still be unique in appearence, I think Tailwind is great.
+SWR & Axios - I think SWR and Axios are an easy to understand and yet powerful tools.
+Font Awesome - Huge repository for icons.
+I was thinking of using Formik for the form-section, but I think it would have been overkill for this application at this point.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Which stories did you select & why?
+Responsive design - I choose this because I think it's important that a modern product can be accessed with a plethora of devices.
+Sort by name and office - I choose this to show my understanding of react and javascript
+Filter by name and office - Same reason as above
+Enable switch between grid and toggle - Show skills, and I think it's important from an UI perspective
+Available from free public url - I think it's fun to show friends and family my projects, this is the simplest way. This project I will obviously not show to anyone.
+Use Typescript or similar, no anys - I used React Proptypes for my type-checking. I have worked with TS in my previous job, but not recently, so I can do it again. I choose not to do it here because the time window was 3-6 hours.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Can I surf there right now?
+Yes, it's deployed here: https://henrikcheng.github.io/1337-people/
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+How and where can I download it?
+You can clone the repository from "https://github.com/HenrikCheng/1337-people", here's the direct link "https://github.com/HenrikCheng/1337-people". You can also download the repo as a zip-file. I am not very active on this account, so please don't judge me to harshly on some other projects here...
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Thank you for your consideration.
+I hope you find my profile interesting and I hope you'd be interested in meeting me. I am happy to answer any question that may arise.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Regards
+Henrik Cheng
