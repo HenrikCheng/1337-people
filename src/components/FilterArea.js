@@ -12,19 +12,40 @@ const FilterArea = ({
   showList,
   setShowList,
 }) => {
+  const { results } = data;
   const sortEmployees = (sortMode) => {
-    if (sortMode === "nameDescending") {
-      data.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
-    } else if (sortMode === "nameAscending") {
-      data.sort((a, b) => (a.name < b.name ? 1 : b.name < a.name ? -1 : 0));
-    } else if (sortMode === "officeDescending") {
-      data.sort((a, b) =>
-        a.office > b.office ? 1 : b.office > a.office ? -1 : 0
-      );
-    } else if (sortMode === "officeAscending") {
-      data.sort((a, b) =>
-        a.office < b.office ? 1 : b.office < a.office ? -1 : 0
-      );
+    if (sortMode === "givenNameDescending") {
+      results.sort((a, b) => {
+        return a.name.first > b.name.first
+          ? 1
+          : b.name.first > a.name.first
+          ? -1
+          : 0;
+      });
+    } else if (sortMode === "givenNameAscending") {
+      results.sort((a, b) => {
+        return a.name.first < b.name.first
+          ? 1
+          : b.name.first < a.name.first
+          ? -1
+          : 0;
+      });
+    } else if (sortMode === "lastNameDescending") {
+      results.sort((a, b) => {
+        return a.name.last > b.name.last
+          ? 1
+          : b.name.last > a.name.last
+          ? -1
+          : 0;
+      });
+    } else if (sortMode === "lastgivenNameAscending") {
+      results.sort((a, b) => {
+        return a.name.last < b.name.last
+          ? 1
+          : b.name.last < a.name.last
+          ? -1
+          : 0;
+      });
     }
     setSortMode(sortMode);
     setEmployeeData(data);
@@ -60,10 +81,12 @@ const FilterArea = ({
             onChange={(event) => sortEmployees(event.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
-            <option value="nameDescending">Name (descending)</option>
-            <option value="nameAscending">Name (ascending)</option>
-            <option value="officeDescending">Office (descending)</option>
-            <option value="officeAscending">Office (ascending)</option>
+            <option value="givenNameDescending">Given name (descending)</option>
+            <option value="givenNameAscending">Given name (ascending)</option>
+            <option value="lastNameDescending">Last name (descending)</option>
+            <option value="lastgivenNameAscending">
+              Last name (ascending)
+            </option>
           </select>
         </label>
       </form>

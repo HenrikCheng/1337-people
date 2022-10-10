@@ -12,9 +12,9 @@ const EmployeeCard = ({ person }) => {
   return (
     <div className="bg-white shadow-xl rounded-lg flex flex-col justify-end hover:-translate-y-1 duration-300 ease-in-out">
       <div className="flex flex-col">
-        {person.imagePortraitUrl ? (
+        {person.picture.large ? (
           <img
-            src={person.imagePortraitUrl}
+            src={person.picture.large}
             alt="portrait of employee"
             className="w-full"
           />
