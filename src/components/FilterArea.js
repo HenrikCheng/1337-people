@@ -60,12 +60,10 @@ const FilterArea = ({
             onChange={(event) => sortEmployees(event.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
-            <option value="givenNameDescending">Given name (descending)</option>
-            <option value="givenNameAscending">Given name (ascending)</option>
-            <option value="lastNameDescending">Last name (descending)</option>
-            <option value="lastgivenNameAscending">
-              Last name (ascending)
-            </option>
+            <option value="nameDescending">Name (descending)</option>
+            <option value="nameAscending">Name (ascending)</option>
+            <option value="officeDescending">Office (descending)</option>
+            <option value="officeAscending">Office (ascending)</option>
           </select>
         </label>
       </form>
