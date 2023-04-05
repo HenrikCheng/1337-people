@@ -10,12 +10,17 @@ import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
 
 function App() {
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const fetcher = (url) =>
+  axios
+    .get(url, {
+      headers: {
+        Authorization:
+          "api-key 14:2023-04-05:henrik.cheng@1337.tech 1818628c1a0136bfe3d4f2146c9789fe008bc3d7dfbe7d4b923c6eac5d63c024",
+      },
+    })
+    .then((res) => res.data);
 
-  const { data, error } = useSWR(
-    "https://randomuser.me/api/?results=30",
-    fetcher
-  );
+const { data, error } = useSWR("https://api.1337co.de/v3/employees", fetcher);
 
   const [employeeData, setEmployeeData] = useState([]);
   const [filterOffice, setFilterOffice] = useState("All");
@@ -23,25 +28,25 @@ function App() {
   const [sortMode, setSortMode] = useState("nameDescending");
   const [showList, setShowList] = useState();
 
-  // useEffect(() => {
-  //   if (data) {
-  //     if (filterOffice === "All") {
-  //       setEmployeeData(
-  //         data.filter((person) =>
-  //           person.name.toLowerCase().includes(filterName.toLowerCase())
-  //         )
-  //       );
-  //     } else {
-  //       setEmployeeData(
-  //         data
-  //           .filter((person) =>
-  //             person.name.toLowerCase().includes(filterName.toLowerCase())
-  //           )
-  //           .filter((person) => person.office === filterOffice)
-  //       );
-  //     }
-  //   }
-  // }, [data, filterName, filterOffice, sortMode]);
+  useEffect(() => {
+    if (data) {
+      if (filterOffice === "All") {
+        setEmployeeData(
+          data.filter((person) =>
+            person.name.toLowerCase().includes(filterName.toLowerCase())
+          )
+        );
+      } else {
+        setEmployeeData(
+          data
+            .filter((person) =>
+              person.name.toLowerCase().includes(filterName.toLowerCase())
+            )
+            .filter((person) => person.office === filterOffice)
+        );
+      }
+    }
+  }, [data, filterName, filterOffice, sortMode]);
 
   if (error) {
     console.log(error.toString());
@@ -56,33 +61,22 @@ function App() {
 
   return (
     <div className="bg-gray-100 p-4 pt-10">
-      <h1 className="text-3xl bold mb-8 mx-4">
-        The fellowship of the tretton37
-      </h1>
-      {data && (
-        <FilterArea
-          setFilterName={setFilterName}
-          setFilterOffice={setFilterOffice}
-          setSortMode={setSortMode}
-          setEmployeeData={setEmployeeData}
-          data={data}
-          showList={showList}
-          setShowList={setShowList}
-        />
-      )}
+      <h1 className="text-3xl bold mb-8 mx-4">The fellowship of the tretton37</h1>
+      <FilterArea
+        setFilterName={setFilterName}
+        setFilterOffice={setFilterOffice}
+        setSortMode={setSortMode}
+        setEmployeeData={setEmployeeData}
+        data={data}
+        showList={showList}
+        setShowList={setShowList}
+      />
       {data ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 lg:gap-6 p-4">
-          {data.results.map((person) => (
-            <div>
-              <img
-                className="grayscale w-50 h-auto rounded-lg"
-                src={person.picture.large}
-                alt={`portrait of ${person.name.first} ${person.name.last}`}
-              />
-              {person.name.first} {person.name.last}
-            </div>
-          ))}
-        </div>
+        <EmployeesDisplay
+          data={employeeData}
+          showList={showList}
+          setShowList={showList}
+        />
       ) : (
         <Loader />
       )}
