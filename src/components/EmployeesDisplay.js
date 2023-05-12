@@ -11,7 +11,7 @@ const EmployeesDisplay = ({ data, showList }) => {
         : data.map((person) => (
             <EmployeeCard
               person={person}
-              key={`${person.phoneNumber}_${person.email}`}
+              key={`${person.phoneNumber}_${person.email}_${person.linkedIn}`}
             />
           ))}
     </div>
