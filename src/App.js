@@ -15,7 +15,10 @@ function App() {
     axios
       .get(url, {
         headers: {
-          Authorization: process.env.REACT_APP_API_KEY,
+          Authorization:
+            process.env.NODE_ENV === "development"
+              ? process.env.REACT_APP_DEV_MODE_API
+              : process.env.REACT_APP_PROD_MODE_API,
         },
       })
       .then((res) => res.data);
@@ -48,16 +51,16 @@ function App() {
     }
   }, [data, filterName, filterOffice, sortMode]);
 
-  if (error) {
-    console.log(error.toString());
-    return (
-      <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
-        <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
-        <h2 className="bold">Oops, something went wrong.</h2>
-        <p>Try reloading the page...</p>
-      </div>
-    );
-  }
+  // if (error) {
+  //   console.log(error.toString());
+  //   return (
+  //     <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
+  //       <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
+  //       <h2 className="bold">Oops, something went wrong.</h2>
+  //       <p>Try reloading the page...</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="bg-gray-100 p-4 pt-10">
@@ -73,17 +76,22 @@ function App() {
         showList={showList}
         setShowList={setShowList}
       />
-      <Suspense fallback={<Loader />}>
-        {data ? (
-          <EmployeesDisplay
-            data={employeeData}
-            showList={showList}
-            setShowList={showList}
-          />
-        ) : (
-          <Loader />
-        )}
-      </Suspense>
+      {data ? (
+        <EmployeesDisplay
+          data={employeeData}
+          showList={showList}
+          setShowList={showList}
+        />
+      ) : (
+        <Loader />
+      )}
+      {error && (
+        <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
+          <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
+          <h2 className="bold">Oops, something went wrong.</h2>
+          <p>Try reloading the page...</p>
+        </div>
+      )}
     </div>
   );
 }

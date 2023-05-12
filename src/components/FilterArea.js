@@ -1,5 +1,7 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faTable } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,23 +14,32 @@ const FilterArea = ({
   showList,
   setShowList,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams({});
+
+  const sortData = data;
   const sortEmployees = (sortMode) => {
     if (sortMode === "nameDescending") {
-      data.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+      sortData.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
     } else if (sortMode === "nameAscending") {
-      data.sort((a, b) => (a.name < b.name ? 1 : b.name < a.name ? -1 : 0));
+      sortData.sort((a, b) => (a.name < b.name ? 1 : b.name < a.name ? -1 : 0));
     } else if (sortMode === "officeDescending") {
-      data.sort((a, b) =>
+      sortData.sort((a, b) =>
         a.office > b.office ? 1 : b.office > a.office ? -1 : 0
       );
     } else if (sortMode === "officeAscending") {
-      data.sort((a, b) =>
+      sortData.sort((a, b) =>
         a.office < b.office ? 1 : b.office < a.office ? -1 : 0
       );
     }
     setSortMode(sortMode);
-    setEmployeeData(data);
+    setEmployeeData(sortData);
   };
+
+  const handleChange = (e) => {
+    setSearchParams({ query: e.target.value });
+    setFilterName(e.target.value);
+  };
+
   return (
     <div className="flex flex-nowrap flex-col lg:flex-row justify-between items-start mx-4 lg:items-center">
       <form className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4">
@@ -37,7 +48,8 @@ const FilterArea = ({
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
-            onChange={(event) => setFilterName(event.target.value)}
+            onChange={(e) => handleChange(e)}
+            value={searchParams.get("query")}
           />
         </label>
         <label className="block text-gray-700 text-sm font-bold mb-2">
