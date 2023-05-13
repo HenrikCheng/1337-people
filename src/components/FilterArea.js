@@ -37,7 +37,7 @@ const FilterArea = ({
   };
 
   useEffect(() => {
-    setFilterName(query);
+    if (query) setFilterName(query);
   }, []);
 
   return (
@@ -52,7 +52,7 @@ const FilterArea = ({
               setSearchParams({ q: e.target.value });
               setFilterName(e.target.value);
             }}
-            value={searchParams.get("q")}
+            value={searchParams.get("q") | ""}
           />
         </label>
         <label className="block text-gray-700 text-sm font-bold mb-2">
