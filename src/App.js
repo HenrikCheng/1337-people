@@ -7,10 +7,20 @@ import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
+import MockData from "./components/MockData.json";
 
 const EmployeesDisplay = lazy(() => import("./components/EmployeesDisplay"));
 
 function App() {
+  const [employeeData, setEmployeeData] = useState([]);
+  const [filterOffice, setFilterOffice] = useState("All");
+  const [filterName, setFilterName] = useState("");
+  const [sortMode, setSortMode] = useState("nameDescending");
+  const [showList, setShowList] = useState();
+
+  // const data = MockData;
+  // const error = false;
+
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -24,13 +34,6 @@ function App() {
       .then((res) => res.data);
 
   const { data, error } = useSWR("https://api.1337co.de/v3/employees", fetcher);
-
-  const [employeeData, setEmployeeData] = useState([]);
-  const [filterOffice, setFilterOffice] = useState("All");
-  const [filterName, setFilterName] = useState("");
-  const [sortMode, setSortMode] = useState("nameDescending");
-  const [showList, setShowList] = useState();
-
   useEffect(() => {
     if (data) {
       if (filterOffice === "All") {
@@ -50,17 +53,6 @@ function App() {
       }
     }
   }, [data, filterName, filterOffice, sortMode]);
-
-  // if (error) {
-  //   console.log(error.toString());
-  //   return (
-  //     <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
-  //       <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
-  //       <h2 className="bold">Oops, something went wrong.</h2>
-  //       <p>Try reloading the page...</p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="bg-gray-100 p-4 pt-10">

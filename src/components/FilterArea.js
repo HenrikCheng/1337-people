@@ -35,11 +35,6 @@ const FilterArea = ({
     setEmployeeData(sortData);
   };
 
-  const handleChange = (e) => {
-    setSearchParams({ query: e.target.value });
-    setFilterName(e.target.value);
-  };
-
   return (
     <div className="flex flex-nowrap flex-col lg:flex-row justify-between items-start mx-4 lg:items-center">
       <form className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4">
@@ -48,8 +43,11 @@ const FilterArea = ({
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
-            onChange={(e) => handleChange(e)}
-            value={searchParams.get("query")}
+            onChange={(e) => {
+              setSearchParams({ q: e.target.value });
+              setFilterName(e.target.value);
+            }}
+            value={searchParams.get("q")}
           />
         </label>
         <label className="block text-gray-700 text-sm font-bold mb-2">
