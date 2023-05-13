@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -15,6 +15,7 @@ const FilterArea = ({
   setShowList,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams({});
+  const query = searchParams.get("q");
 
   const sortData = data;
   const sortEmployees = (sortMode) => {
@@ -34,6 +35,10 @@ const FilterArea = ({
     setSortMode(sortMode);
     setEmployeeData(sortData);
   };
+
+  useEffect(() => {
+    setFilterName(query);
+  }, []);
 
   return (
     <div className="flex flex-nowrap flex-col lg:flex-row justify-between items-start mx-4 lg:items-center">
