@@ -45,10 +45,10 @@ const EmployeeCard = ({ person }) => {
       ) : (
         <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
       )}
-      <div className="flex flex-col w-full lg:flex-row justify-between p-4">
+      <div className="flex flex-col w-full lg:flex-row justify-between sm:p-4">
         <div className="flex flex-col items-start">
-          <h3>{person.name}</h3>
-          <p>Office: {person.office}</p>
+          <h3 className="whitespace-nowrap hyphens-auto">{person.name}</h3>
+          <p className="whitespace-nowrap hyphens-auto">{`Office: ${person.office}`}</p>
         </div>
         <div className="space-x-2 py-2 flex flex-nowrap">
           {person.linkedIn && (

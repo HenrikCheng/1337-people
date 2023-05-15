@@ -7,7 +7,6 @@ import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
-import MockData from "./components/MockData.json";
 
 const EmployeesDisplay = lazy(() => import("./components/EmployeesDisplay"));
 
@@ -17,9 +16,6 @@ function App() {
   const [filterName, setFilterName] = useState("");
   const [sortMode, setSortMode] = useState("nameDescending");
   const [showList, setShowList] = useState();
-
-  // const data = MockData;
-  // const error = false;
 
   const fetcher = (url) =>
     axios
@@ -55,8 +51,8 @@ function App() {
   }, [data, filterName, filterOffice, sortMode]);
 
   return (
-    <div className="bg-gray-100 p-4 pt-10">
-      <h1 className="text-3xl bold mb-8 mx-4">
+    <main className="bg-gray-100 p-4 pt-10 min-h-screen">
+      <h1 className="text-4xl font-bold mb-8 mx-4">
         The fellowship of the tretton37
       </h1>
       <FilterArea
@@ -77,6 +73,7 @@ function App() {
       ) : (
         <Loader />
       )}
+      {employeeData.length === 0 && "No employees found"}
       {error && (
         <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
           <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
@@ -84,7 +81,7 @@ function App() {
           <p>Try reloading the page...</p>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 
