@@ -23,7 +23,6 @@ const EmployeeCard = ({ person }) => {
           alt={`portrait of ${person.name}`}
           className="h-full grayscale object-cover"
         />
-        {/* <span>{person.mainText}</span> */}
       </button>
     );
   };
@@ -40,12 +39,12 @@ const EmployeeCard = ({ person }) => {
         <img
           src={open ? person.imageWallOfLeetUrl : person.imagePortraitUrl}
           alt="portrait of employee"
-          className="h-full grayscale object-cover"
+          className="h-full grayscale object-cover rounded-t-lg"
         />
       ) : (
         <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
       )}
-      <div className="flex flex-col w-full lg:flex-row justify-between sm:p-4">
+      <div className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4">
         <div className="flex flex-col items-start">
           <h3 className="whitespace-nowrap hyphens-auto">{person.name}</h3>
           <p className="whitespace-nowrap hyphens-auto">{`Office: ${person.office}`}</p>

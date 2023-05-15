@@ -52,7 +52,7 @@ function App() {
 
   return (
     <main className="bg-gray-100 p-4 pt-10 min-h-screen">
-      <h1 className="text-4xl font-bold mb-8 mx-4">
+      <h1 className="text-4xl bold md:text-8xl md:font-extrabold mb-8 mx-4">
         The fellowship of the tretton37
       </h1>
       <FilterArea
