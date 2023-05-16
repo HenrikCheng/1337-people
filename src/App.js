@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 
 import "./App.css";
+import useLocalstorage from "./utils/useLocalStorage";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
 
@@ -50,11 +51,21 @@ function App() {
     }
   }, [data, filterName, filterOffice, sortMode]);
 
+  // const [name, setName] = useLocalstorage("name", "");
+
   return (
-    <main className="bg-gray-100 p-4 pt-10 min-h-screen">
-      <h1 className="text-4xl bold md:text-8xl md:font-extrabold mb-8 mx-4">
-        The fellowship of the tretton37
+    <main className="bg-gray-100 p-4 sm:p-8 pt-10 min-h-screen">
+      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+        The fellowship of the{" "}
+        <a className="underline underline-offset-3" href="/">
+          Tretton37
+        </a>
       </h1>
+      {/* <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      /> */}
       <FilterArea
         setFilterName={setFilterName}
         setFilterOffice={setFilterOffice}
