@@ -49,7 +49,11 @@ const FilterArea = ({
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             onChange={(e) => {
-              setSearchParams({ q: e.target.value });
+              let updatedSearchParams = new URLSearchParams(
+                searchParams.toString()
+              );
+              updatedSearchParams.set("q", e.target.value);
+              setSearchParams(updatedSearchParams.toString());
               setFilterName(e.target.value);
             }}
             defaultValue={
@@ -62,7 +66,14 @@ const FilterArea = ({
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Filter by office:
           <select
-            onChange={(event) => setFilterOffice(event.target.value)}
+            onChange={(event) => {
+              let updatedSearchParams = new URLSearchParams(
+                searchParams.toString()
+              );
+              updatedSearchParams.set("office", event.target.value);
+              setSearchParams(updatedSearchParams.toString());
+              setFilterOffice(event.target.value);
+            }}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="All">All</option>
@@ -76,7 +87,14 @@ const FilterArea = ({
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Sort by:
           <select
-            onChange={(event) => sortEmployees(event.target.value)}
+            onChange={(event) => {
+              let updatedSearchParams = new URLSearchParams(
+                searchParams.toString()
+              );
+              updatedSearchParams.set("sort", event.target.value);
+              setSearchParams(updatedSearchParams.toString());
+              sortEmployees(event.target.value);
+            }}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="nameDescending">Name (descending)</option>
@@ -85,6 +103,7 @@ const FilterArea = ({
             <option value="officeAscending">Office (ascending)</option>
           </select>
         </label>
+        {/* <button type="submit">Submit</button> */}
       </form>
       <button
         onClick={() => setShowList(!showList)}

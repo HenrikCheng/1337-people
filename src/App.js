@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -57,9 +57,7 @@ function App() {
     <main className="bg-gray-100 p-4 sm:p-8 pt-10 min-h-screen">
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
         The fellowship of the{" "}
-        <a className="underline underline-offset-3" href="/">
-          Tretton37
-        </a>
+        <span className="underline underline-offset-3">Tretton37</span>
       </h1>
       {/* <input
         type="text"
