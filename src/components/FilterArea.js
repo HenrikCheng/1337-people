@@ -78,6 +78,12 @@ const FilterArea = ({
               setSearchParams(updatedSearchParams.toString());
               setFilterOffice(event.target.value);
             }}
+            defaultValue={
+              searchParams.get("office") &&
+              searchParams.get("office").length > 1
+                ? searchParams.get("office")
+                : ""
+            }
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="All">All</option>
@@ -99,6 +105,11 @@ const FilterArea = ({
               setSearchParams(updatedSearchParams.toString());
               sortEmployees(event.target.value);
             }}
+            defaultValue={
+              searchParams.get("sort") && searchParams.get("sort").length > 1
+                ? searchParams.get("sort")
+                : ""
+            }
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="nameDescending">Name (descending)</option>
