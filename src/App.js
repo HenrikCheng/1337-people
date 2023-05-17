@@ -69,20 +69,20 @@ function App() {
         setFilterOffice={setFilterOffice}
         setSortMode={setSortMode}
         setEmployeeData={setEmployeeData}
-        data={data}
+        employeeData={employeeData}
         showList={showList}
         setShowList={setShowList}
       />
       {data ? (
         <EmployeesDisplay
-          data={employeeData}
+          employeeData={employeeData}
           showList={showList}
           setShowList={showList}
         />
       ) : (
         <Loader />
       )}
-      {employeeData.length === 0 && "No employees found"}
+      {employeeData && employeeData.length === 0 && "No employees found"}
       {error && (
         <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
           <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />

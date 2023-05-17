@@ -10,15 +10,14 @@ const FilterArea = ({
   setFilterOffice,
   setSortMode,
   setEmployeeData,
-  data,
+  employeeData,
   showList,
   setShowList,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams({});
-  const query = searchParams.get("q");
 
-  const sortData = data;
   const sortEmployees = (sortMode) => {
+    const sortData = employeeData;
     if (sortMode === "nameDescending") {
       sortData.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
     } else if (sortMode === "nameAscending") {
@@ -37,7 +36,12 @@ const FilterArea = ({
   };
 
   useEffect(() => {
-    if (query) setFilterName(query);
+    const q = searchParams.get("q");
+    const office = searchParams.get("office");
+    const sort = searchParams.get("sort");
+    if (q) setFilterName(q);
+    if (office) setFilterOffice(office);
+    if (sort) sortEmployees("henrik");
   }, []);
 
   return (
@@ -134,7 +138,7 @@ FilterArea.propTypes = {
   setFilterOffice: PropTypes.func.isRequired,
   setSortMode: PropTypes.func.isRequired,
   setEmployeeData: PropTypes.func.isRequired,
-  data: PropTypes.array,
+  employeeData: PropTypes.array,
   showList: PropTypes.bool,
   setShowList: PropTypes.func.isRequired,
 };
