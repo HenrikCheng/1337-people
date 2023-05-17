@@ -8,16 +8,9 @@ import "./App.css";
 import useLocalstorage from "./utils/useLocalStorage";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
-
-const EmployeesDisplay = lazy(() => import("./components/EmployeesDisplay"));
+import EmployeesDisplay from "./components/EmployeesDisplay";
 
 function App() {
-  const [employeeData, setEmployeeData] = useState([]);
-  const [filterOffice, setFilterOffice] = useState("All");
-  const [filterName, setFilterName] = useState("");
-  const [sortMode, setSortMode] = useState("nameDescending");
-  const [showList, setShowList] = useState();
-
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -31,25 +24,8 @@ function App() {
       .then((res) => res.data);
 
   const { data, error } = useSWR("https://api.1337co.de/v3/employees", fetcher);
-  useEffect(() => {
-    if (data) {
-      if (filterOffice === "All") {
-        setEmployeeData(
-          data.filter((person) =>
-            person.name.toLowerCase().includes(filterName.toLowerCase())
-          )
-        );
-      } else {
-        setEmployeeData(
-          data
-            .filter((person) =>
-              person.name.toLowerCase().includes(filterName.toLowerCase())
-            )
-            .filter((person) => person.office === filterOffice)
-        );
-      }
-    }
-  }, [data, filterName, filterOffice, sortMode]);
+
+  const [showList, setShowList] = useState();
 
   // const [name, setName] = useLocalstorage("name", "");
 
@@ -64,25 +40,17 @@ function App() {
         value={name}
         onChange={(e) => setName(e.target.value)}
       /> */}
-      <FilterArea
-        setFilterName={setFilterName}
-        setFilterOffice={setFilterOffice}
-        setSortMode={setSortMode}
-        setEmployeeData={setEmployeeData}
-        employeeData={employeeData}
-        showList={showList}
-        setShowList={setShowList}
-      />
+      <FilterArea showList={showList} setShowList={setShowList} />
       {data ? (
         <EmployeesDisplay
-          employeeData={employeeData}
+          data={data}
           showList={showList}
           setShowList={showList}
         />
       ) : (
         <Loader />
       )}
-      {employeeData && employeeData.length === 0 && "No employees found"}
+      {data && data.length === 0 && "No employees found"}
       {error && (
         <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
           <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />

@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
 
 import EmployeeModal from "./EmployeeModal";
 import EmployeeCard from "./EmployeeCard";
 
-const EmployeesDisplay = ({ employeeData, showList }) => {
+const EmployeesDisplay = ({ data, showList }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchParams] = useSearchParams({});
+  const q = searchParams.get("q").toLowerCase();
+  const office = searchParams.get("office");
+  const sort = searchParams.get("sort");
 
-  useEffect(() => {
-    console.log(
-      "🚀 ~ file: EmployeesDisplay.js:8 ~ EmployeesDisplay ~ isOpen:",
-      isOpen
-    );
-  }, [isOpen]);
+  const filteredData = data.filter((person) =>
+    office === "All"
+      ? person.name.toLowerCase().includes(q)
+      : person.name.toLowerCase().includes(q) && person.office === office
+  );
 
-  if (employeeData)
+  const sortOptions = {
+    nameDescending: (a, b) => b.name.localeCompare(a.name),
+    nameAscending: (a, b) => a.name.localeCompare(b.name),
+    officeDescending: (a, b) => b.office.localeCompare(a.office),
+    officeAscending: (a, b) => a.office.localeCompare(b.office),
+  };
+
+  const sortedData = sort ? filteredData.sort(sortOptions[sort]) : filteredData;
+
+  if (sortedData)
     return (
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 lg:gap-6 py-4">
         {showList
-          ? employeeData.map((person) => (
+          ? sortedData.map((person) => (
               <button
                 type="button"
                 className="hover:bg-red-500 relative"
@@ -40,7 +53,7 @@ const EmployeesDisplay = ({ employeeData, showList }) => {
                 )}
               </button>
             ))
-          : employeeData.map((person) => (
+          : sortedData.map((person) => (
               <EmployeeCard
                 person={person}
                 key={`${person.phoneNumber}_${person.email}_${person.linkedIn}`}

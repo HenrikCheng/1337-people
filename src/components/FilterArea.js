@@ -1,52 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faTable } from "@fortawesome/free-solid-svg-icons";
 
-const FilterArea = ({
-  setFilterName,
-  setFilterOffice,
-  setSortMode,
-  setEmployeeData,
-  employeeData,
-  showList,
-  setShowList,
-}) => {
+const FilterArea = ({ showList, setShowList }) => {
   const [searchParams, setSearchParams] = useSearchParams({});
-
-  const sortEmployees = (sortMode) => {
-    const sortData = employeeData;
-    if (sortMode === "nameDescending") {
-      sortData.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
-    } else if (sortMode === "nameAscending") {
-      sortData.sort((a, b) => (a.name < b.name ? 1 : b.name < a.name ? -1 : 0));
-    } else if (sortMode === "officeDescending") {
-      sortData.sort((a, b) =>
-        a.office > b.office ? 1 : b.office > a.office ? -1 : 0
-      );
-    } else if (sortMode === "officeAscending") {
-      sortData.sort((a, b) =>
-        a.office < b.office ? 1 : b.office < a.office ? -1 : 0
-      );
-    }
-    setSortMode(sortMode);
-    setEmployeeData(sortData);
-  };
-
-  useEffect(() => {
-    const q = searchParams.get("q");
-    const office = searchParams.get("office");
-    const sort = searchParams.get("sort");
-    if (q) setFilterName(q);
-    if (office) setFilterOffice(office);
-    if (sort) sortEmployees("henrik");
-  }, []);
 
   return (
     <div className="flex flex-nowrap flex-col lg:flex-row justify-between items-start lg:items-center">
-      <form className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4">
+      <form
+        className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Filter by name:
           <input
@@ -58,7 +25,6 @@ const FilterArea = ({
               );
               updatedSearchParams.set("q", e.target.value);
               setSearchParams(updatedSearchParams.toString());
-              setFilterName(e.target.value);
             }}
             defaultValue={
               searchParams.get("q") && searchParams.get("q").length > 1
@@ -76,7 +42,6 @@ const FilterArea = ({
               );
               updatedSearchParams.set("office", event.target.value);
               setSearchParams(updatedSearchParams.toString());
-              setFilterOffice(event.target.value);
             }}
             defaultValue={
               searchParams.get("office") &&
@@ -103,7 +68,6 @@ const FilterArea = ({
               );
               updatedSearchParams.set("sort", event.target.value);
               setSearchParams(updatedSearchParams.toString());
-              sortEmployees(event.target.value);
             }}
             defaultValue={
               searchParams.get("sort") && searchParams.get("sort").length > 1
@@ -118,38 +82,24 @@ const FilterArea = ({
             <option value="officeAscending">Office (ascending)</option>
           </select>
         </label>
-        {/* <button type="submit">Submit</button> */}
       </form>
       <button
         onClick={() => setShowList(!showList)}
         className="fa-xl py-3 flex"
       >
-        {showList ? (
-          <div className="flex flex-col items-end">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Toggle view mode
-            </label>
-            <FontAwesomeIcon icon={faList} />
-          </div>
-        ) : (
-          <div className="flex flex-col items-end">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Toggle view mode
-            </label>
-            <FontAwesomeIcon icon={faTable} />
-          </div>
-        )}
+        <div className="flex flex-col items-end">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Toggle view mode
+          </label>
+          <FontAwesomeIcon icon={showList ? faList : faTable} />
+        </div>
       </button>
     </div>
   );
 };
 
 FilterArea.propTypes = {
-  setFilterName: PropTypes.func.isRequired,
-  setFilterOffice: PropTypes.func.isRequired,
-  setSortMode: PropTypes.func.isRequired,
-  setEmployeeData: PropTypes.func.isRequired,
-  employeeData: PropTypes.array,
+  data: PropTypes.array,
   showList: PropTypes.bool,
   setShowList: PropTypes.func.isRequired,
 };
