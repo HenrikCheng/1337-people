@@ -7,24 +7,28 @@ import {
   faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import PropTypes from "prop-types";
+import parse from "html-react-parser";
 
 const EmployeeCard = ({ person }) => {
   const [open, setOpen] = useState(false);
 
   const CardDetails = () => {
+    const htmlString = person.mainText;
     return (
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="fixed z-10 inset-0 m-20 rounded-lg flex"
+        className="fixed z-10 inset-0 rounded-lg flex p-20"
       >
         <img
           src={person.imageWallOfLeetUrl}
           alt={`portrait of ${person.name}`}
           className="h-full grayscale object-cover"
         />
-        <div className="bg-gray-900 text-white">
-          <p>{person.mainText}</p>
+        <div className="bg-gray-900 text-white h-full overflow-y-scroll p-4">
+          <span className="leading-relaxed underline-offset-4">
+            {parse(htmlString)}
+          </span>
         </div>
       </button>
     );
@@ -51,7 +55,10 @@ const EmployeeCard = ({ person }) => {
         )}
         <div className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4">
           <div className="flex flex-col items-start">
-            <h3 className="whitespace-nowrap hyphens-auto">{person.name}</h3>
+            <h4 className="whitespace-nowrap hyphens-auto font-semibold">{person.name}</h4>
+            <p className="whitespace-nowrap hyphens-auto">
+              {person.primaryRole}
+            </p>
             <p className="whitespace-nowrap hyphens-auto">{`Office: ${person.office}`}</p>
           </div>
           <div className="space-x-2 py-2 flex flex-nowrap">

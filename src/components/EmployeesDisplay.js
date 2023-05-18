@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import EmployeeCard from "./EmployeeCard";
 const EmployeesDisplay = ({ data, showList }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchParams] = useSearchParams({});
-  const q = searchParams.get("q").toLowerCase() || "";
+  const q = (searchParams.get("q") || "").toLowerCase();
   const office = searchParams.get("office") || "All";
   const sort = searchParams.get("sort") || "nameDescending";
 
