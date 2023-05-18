@@ -39,17 +39,11 @@ const EmployeesDisplay = ({ data, showList }) => {
               >
                 {person.name}
                 {isOpen && (
-                  <div className="relative">
-                    <EmployeeModal />
-                    <span
-                      type="button"
-                      onClick={() => {
-                        setIsOpen(!isOpen);
-                      }}
-                    >
-                      x
-                    </span>
-                  </div>
+                  <EmployeeModal
+                    person={person}
+                    open={isOpen}
+                    setOpen={setIsOpen}
+                  />
                 )}
               </button>
             ))
