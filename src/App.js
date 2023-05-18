@@ -24,6 +24,7 @@ function App() {
       .then((res) => res.data);
 
   const { data, error } = useSWR("https://api.1337co.de/v3/employees", fetcher);
+  console.log("🚀 ~ file: App.js:27 ~ App ~ data:", data);
 
   const [showList, setShowList] = useState();
 
@@ -32,7 +33,7 @@ function App() {
   return (
     <main className="bg-gray-100 p-4 sm:p-8 pt-10 min-h-screen">
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-        The fellowship of the{" "}
+        The fellowship of{" "}
         <span className="underline underline-offset-3">Tretton37</span>
       </h1>
       {/* <input

@@ -16,71 +16,77 @@ const EmployeeCard = ({ person }) => {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="bg-white shadow-xl rounded-lg flex flex-col justify-end -translate-y-1 flex flex-col"
+        className="fixed z-10 inset-0 m-20 rounded-lg flex"
       >
         <img
           src={person.imageWallOfLeetUrl}
           alt={`portrait of ${person.name}`}
           className="h-full grayscale object-cover"
         />
+        <div className="bg-gray-900 text-white">
+          <p>{person.mainText}</p>
+        </div>
       </button>
     );
   };
 
-  if (open) return <CardDetails />;
-
   return (
-    <button
-      type="button"
-      onClick={() => setOpen(!open)}
-      className="bg-white shadow-xl rounded-lg flex flex-col justify-end hover:-translate-y-1 duration-300 ease-in-out flex flex-col"
-    >
-      {person.imagePortraitUrl ? (
-        <img
-          src={open ? person.imageWallOfLeetUrl : person.imagePortraitUrl}
-          alt="portrait of employee"
-          className="h-full grayscale object-cover rounded-t-lg"
-        />
-      ) : (
-        <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
-      )}
-      <div className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4">
-        <div className="flex flex-col items-start">
-          <h3 className="whitespace-nowrap hyphens-auto">{person.name}</h3>
-          <p className="whitespace-nowrap hyphens-auto">{`Office: ${person.office}`}</p>
-        </div>
-        <div className="space-x-2 py-2 flex flex-nowrap">
-          {person.linkedIn && (
-            <a href={`https://linkedIn.com/${person.linkedIn}`}>
-              <FontAwesomeIcon
-                icon={faLinkedin}
-                className="fa-xl hover:text-gray-500"
-              />
-            </a>
-          )}
-          {person.gitHub && (
-            <a href={`https://github.com/${person.gitHub}`}>
-              <FontAwesomeIcon
-                icon={faGithubSquare}
-                className="fa-xl hover:text-gray-500"
-              />
-            </a>
-          )}
-          {person.twitter && (
-            <a href={`https://twitter.com/${person.twitter}`}>
-              <FontAwesomeIcon
-                icon={faTwitterSquare}
-                className="fa-xl hover:text-gray-500"
-              />
-            </a>
-          )}
+    <div className="relative">
+      {open && <CardDetails />}
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`bg-white shadow-xl rounded-lg flex flex-col justify-end duration-300 ease-in-out ${
+          open ? "-translate-y-1" : "hover:-translate-y-1"
+        }`}
+      >
+        {person.imagePortraitUrl ? (
+          <img
+            src={person.imagePortraitUrl}
+            alt="portrait of employee"
+            className="h-full grayscale object-cover rounded-t-lg"
+          />
+        ) : (
+          <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
+        )}
+        <div className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4">
+          <div className="flex flex-col items-start">
+            <h3 className="whitespace-nowrap hyphens-auto">{person.name}</h3>
+            <p className="whitespace-nowrap hyphens-auto">{`Office: ${person.office}`}</p>
+          </div>
+          <div className="space-x-2 py-2 flex flex-nowrap">
+            {person.linkedIn && (
+              <a href={`https://linkedIn.com/${person.linkedIn}`}>
+                <FontAwesomeIcon
+                  icon={faLinkedin}
+                  className="fa-xl hover:text-gray-500"
+                />
+              </a>
+            )}
+            {person.gitHub && (
+              <a href={`https://github.com/${person.gitHub}`}>
+                <FontAwesomeIcon
+                  icon={faGithubSquare}
+                  className="fa-xl hover:text-gray-500"
+                />
+              </a>
+            )}
+            {person.twitter && (
+              <a href={`https://twitter.com/${person.twitter}`}>
+                <FontAwesomeIcon
+                  icon={faTwitterSquare}
+                  className="fa-xl hover:text-gray-500"
+                />
+              </a>
+            )}
 
-          {!person.twitter && !person.gitHub && !person.linkedIn && (
-            <div className="h-6" />
-          )}
+            {!person.twitter && !person.gitHub && !person.linkedIn && (
+              <div className="h-6" />
+            )}
+          </div>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 };
 

@@ -8,9 +8,9 @@ import EmployeeCard from "./EmployeeCard";
 const EmployeesDisplay = ({ data, showList }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchParams] = useSearchParams({});
-  const q = searchParams.get("q").toLowerCase();
-  const office = searchParams.get("office");
-  const sort = searchParams.get("sort");
+  const q = searchParams.get("q").toLowerCase() || "";
+  const office = searchParams.get("office") || "All";
+  const sort = searchParams.get("sort") || "nameDescending";
 
   const filteredData = data.filter((person) =>
     office === "All"
@@ -19,8 +19,8 @@ const EmployeesDisplay = ({ data, showList }) => {
   );
 
   const sortOptions = {
-    nameDescending: (a, b) => b.name.localeCompare(a.name),
-    nameAscending: (a, b) => a.name.localeCompare(b.name),
+    nameAscending: (a, b) => b.name.localeCompare(a.name),
+    nameDescending: (a, b) => a.name.localeCompare(b.name),
     officeDescending: (a, b) => b.office.localeCompare(a.office),
     officeAscending: (a, b) => a.office.localeCompare(b.office),
   };
@@ -39,7 +39,7 @@ const EmployeesDisplay = ({ data, showList }) => {
               >
                 {person.name}
                 {isOpen && (
-                  <div className="fixed top-0 left-0 right-0 bg-red-500">
+                  <div className="relative">
                     <EmployeeModal />
                     <span
                       type="button"
