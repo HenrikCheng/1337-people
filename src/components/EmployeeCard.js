@@ -7,40 +7,18 @@ import {
   faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import PropTypes from "prop-types";
-import parse from "html-react-parser";
+import EmployeeModal from "./EmployeeModal";
 
 const EmployeeCard = ({ person }) => {
   const [open, setOpen] = useState(false);
 
-  const CardDetails = () => {
-    const htmlString = person.mainText;
-    return (
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="fixed z-10 inset-0 rounded-lg flex p-20"
-      >
-        <img
-          src={person.imageWallOfLeetUrl}
-          alt={`portrait of ${person.name}`}
-          className="h-full grayscale object-cover"
-        />
-        <div className="bg-gray-900 text-white h-full overflow-y-scroll p-4">
-          <span className="leading-relaxed underline-offset-4">
-            {parse(htmlString)}
-          </span>
-        </div>
-      </button>
-    );
-  };
-
   return (
     <div className="relative">
-      {open && <CardDetails />}
+      {open && <EmployeeModal person={person} open={open} setOpen={setOpen} />}
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className={`bg-white shadow-xl rounded-lg flex flex-col justify-end duration-300 ease-in-out ${
+        className={`bg-white shadow-xl rounded-lg flex flex-col justify-end duration-300 h-full ease-in-out ${
           open ? "-translate-y-1" : "hover:-translate-y-1"
         }`}
       >
@@ -55,7 +33,9 @@ const EmployeeCard = ({ person }) => {
         )}
         <div className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4">
           <div className="flex flex-col items-start">
-            <h4 className="whitespace-nowrap hyphens-auto font-semibold">{person.name}</h4>
+            <h4 className="whitespace-nowrap hyphens-auto font-semibold">
+              {person.name}
+            </h4>
             <p className="whitespace-nowrap hyphens-auto">
               {person.primaryRole}
             </p>
