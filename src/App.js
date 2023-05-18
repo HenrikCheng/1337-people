@@ -8,7 +8,7 @@ import "./App.css";
 import useLocalstorage from "./utils/useLocalStorage";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
-import EmployeesDisplay from "./components/EmployeesDisplay";
+import EmployeeDisplay from "./components/EmployeeDisplay";
 
 function App() {
   const fetcher = (url) =>
@@ -43,7 +43,7 @@ function App() {
       /> */}
       <FilterArea showList={showList} setShowList={setShowList} />
       {data ? (
-        <EmployeesDisplay
+        <EmployeeDisplay
           data={data}
           showList={showList}
           setShowList={showList}

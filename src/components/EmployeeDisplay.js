@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
 
-import EmployeeModal from "./EmployeeModal";
 import EmployeeCard from "./EmployeeCard";
+import EmployeeList from "./EmployeeList";
 
-const EmployeesDisplay = ({ data, showList }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const EmployeeDisplay = ({ data, showList }) => {
   const [searchParams] = useSearchParams({});
   const q = (searchParams.get("q") || "").toLowerCase();
   const office = searchParams.get("office") || "All";
@@ -32,25 +31,15 @@ const EmployeesDisplay = ({ data, showList }) => {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 lg:gap-6 py-4">
         {showList
           ? sortedData.map((person) => (
-              <button
-                type="button"
-                className="hover:bg-red-500 relative"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {person.name}
-                {isOpen && (
-                  <EmployeeModal
-                    person={person}
-                    open={isOpen}
-                    setOpen={setIsOpen}
-                  />
-                )}
-              </button>
+              <EmployeeList
+                person={person}
+                key={`${person.phoneNumber}_${person.email}`}
+              />
             ))
           : sortedData.map((person) => (
               <EmployeeCard
                 person={person}
-                key={`${person.phoneNumber}_${person.email}_${person.linkedIn}`}
+                key={`${person.phoneNumber}_${person.email}`}
               />
             ))}
       </div>
@@ -58,9 +47,9 @@ const EmployeesDisplay = ({ data, showList }) => {
   return <></>;
 };
 
-EmployeesDisplay.propTypes = {
+EmployeeDisplay.propTypes = {
   data: PropTypes.array,
   showList: PropTypes.bool,
 };
 
-export default EmployeesDisplay;
+export default EmployeeDisplay;

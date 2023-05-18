@@ -6,7 +6,7 @@ const EmployeeModal = ({ person, open, setOpen }) => {
     <button
       type="button"
       onClick={() => setOpen(!open)}
-      className="fixed z-10 inset-0 rounded-lg flex sm:p-20 md:px-40 lg:px-64 xl:px-96"
+      className="fixed z-10 inset-0 rounded-lg flex sm:p-20 md:px-40 lg:px-64 xl:px-96 bg-black bg-opacity-50"
     >
       <img
         src={person.imageWallOfLeetUrl}

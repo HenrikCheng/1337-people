@@ -36,8 +36,10 @@ const EmployeeCard = ({ person }) => {
             <h4 className="whitespace-nowrap hyphens-auto font-semibold">
               {person.name}
             </h4>
-            <p className="whitespace-nowrap hyphens-auto">
-              {person.primaryRole}
+            <p className="whitespace-nowrap">
+              {person.primaryRole === "Product"
+                ? "Product Owner"
+                : person.primaryRole}
             </p>
             <p className="whitespace-nowrap hyphens-auto">{`Office: ${person.office}`}</p>
           </div>
