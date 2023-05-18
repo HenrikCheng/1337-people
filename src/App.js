@@ -1,14 +1,15 @@
-import React, { useEffect, useState, lazy } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 
 import "./App.css";
-import useLocalstorage from "./utils/useLocalStorage";
+import useLocalstorage from "./hooks/useLocalStorage";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
 import EmployeeDisplay from "./components/EmployeeDisplay";
+import StarredConsultants from "./components/StarredConsultants";
 
 function App() {
   const fetcher = (url) =>
@@ -24,7 +25,6 @@ function App() {
       .then((res) => res.data);
 
   const { data, error } = useSWR("https://api.1337co.de/v3/employees", fetcher);
-  console.log("🚀 ~ file: App.js:27 ~ App ~ data:", data);
 
   const [showList, setShowList] = useState();
 
@@ -36,6 +36,7 @@ function App() {
         The fellowship of{" "}
         <span className="underline underline-offset-3">Tretton37</span>
       </h1>
+      <StarredConsultants />
       {/* <input
         type="text"
         value={name}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -6,19 +6,79 @@ import {
   faGithubSquare,
   faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import EmployeeModal from "./EmployeeModal";
 
 const EmployeeCard = ({ person }) => {
   const [open, setOpen] = useState(false);
+  const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const movieFavourites = JSON.parse(
+      localStorage.getItem("favorite-consultants")
+    );
+
+    if (movieFavourites) {
+      setFavourites(movieFavourites);
+    }
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("favorite-consultants", JSON.stringify(items));
+  };
+
+  const addFavouriteConsultant = (movie) => {
+    let newFavouriteList = [...favourites, movie];
+    favourites.forEach((element) => {
+      if (element === movie) {
+        newFavouriteList = favourites;
+      }
+    });
+    setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
+  };
+
+  const removeFavouriteConsultant = (movie) => {
+    const newFavouriteList = favourites.filter(
+      (favourite) => favourite.name !== movie.name
+    );
+
+    setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
+  };
 
   return (
     <div className="relative">
       {open && <EmployeeModal person={person} open={open} setOpen={setOpen} />}
       <button
+        onClick={(e) => {
+          addFavouriteConsultant(person);
+          e.preventDefault();
+        }}
+        type="button"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+          className="fa-xl hover:text-gray-500 absolute top-5 right-0 z-10 p-2"
+        />
+      </button>
+      <button
+        onClick={(e) => {
+          removeFavouriteConsultant(person);
+          e.preventDefault();
+        }}
+        type="button"
+      >
+        <FontAwesomeIcon
+          icon={faMinus}
+          className="fa-xl hover:text-gray-500 absolute top-5 left-0 z-10 p-2"
+        />
+      </button>
+      <button
         type="button"
         onClick={() => setOpen(!open)}
-        className={`bg-white shadow-xl rounded-lg flex flex-col justify-end duration-300 h-full ease-in-out ${
+        className={`bg-white shadow-xl rounded-lg flex flex-col justify-end duration-300 h-full ease-in-out relative ${
           open ? "-translate-y-1" : "hover:-translate-y-1"
         }`}
       >
