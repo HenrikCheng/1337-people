@@ -32,9 +32,8 @@ function App() {
 
   return (
     <main className="bg-gray-100 p-4 sm:p-8 pt-10 min-h-screen">
-      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-        The fellowship of{" "}
-        <span className="underline underline-offset-3">Tretton37</span>
+      <h1 className="mb-4 text-4xl font-thin leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+        The fellowship of <span className="font-bold">Tretton37</span>
       </h1>
       <StarredConsultants />
       {/* <input
