@@ -11,11 +11,17 @@ const EmployeeDisplay = ({ data, showList }) => {
   const office = searchParams.get("office") || "All";
   const sort = searchParams.get("sort") || "nameDescending";
 
-  const filteredData = data.filter((person) =>
-    office === "All"
-      ? person.name.toLowerCase().includes(q)
-      : person.name.toLowerCase().includes(q) && person.office === office
-  );
+  const filteredData = data.filter((person) => {
+    if (office === "All") {
+      return person.name && person.name.toLowerCase().includes(q);
+    } else {
+      return (
+        person.name &&
+        person.name.toLowerCase().includes(q) &&
+        person.office === office
+      );
+    }
+  });
 
   const sortOptions = {
     nameAscending: (a, b) => b.name.localeCompare(a.name),
