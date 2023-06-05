@@ -43,6 +43,7 @@ describe("On API response", () => {
       </Router>
     );
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       // Wait for the error message to render
       await waitFor(() => {

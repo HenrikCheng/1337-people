@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faList, faTable, faX } from "@fortawesome/free-solid-svg-icons";
 
 const FilterArea = ({ showList, setShowList }) => {
   const [searchParams, setSearchParams] = useSearchParams({});
@@ -14,9 +14,10 @@ const FilterArea = ({ showList, setShowList }) => {
         className="flex flex-col flex-nowrap sm:flex-row justify-between sm:space-x-4"
         onSubmit={(e) => e.preventDefault()}
       >
-        <label className="block text-gray-700 text-sm font-bold mb-2">
+        <label className="block text-gray-700 text-sm font-bold mb-2 relative">
           Filter by name:
           <input
+            id="nameInput"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             onChange={(e) => {
@@ -32,6 +33,17 @@ const FilterArea = ({ showList, setShowList }) => {
                 : ""
             }
           />
+          {document.getElementById("nameInput").value && (
+            <button
+              className="absolute top-1/2 right-2"
+              onClick={() => {
+                setSearchParams("");
+                document.getElementById("nameInput").value = "";
+              }}
+            >
+              <FontAwesomeIcon icon={faX} />
+            </button>
+          )}
         </label>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Filter by office:
