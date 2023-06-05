@@ -16,10 +16,7 @@ function App() {
     axios
       .get(url, {
         headers: {
-          Authorization:
-            process.env.NODE_ENV === "development"
-              ? process.env.REACT_APP_DEV_MODE_API
-              : process.env.REACT_APP_PROD_MODE_API,
+          Authorization: process.env.SECRET_API_KEY,
         },
       })
       .then((res) => res.data);
