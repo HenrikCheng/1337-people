@@ -4,8 +4,8 @@ import StarredConsultants from "./StarredConsultants";
 describe("StarredConsultants", () => {
   render(<StarredConsultants />);
 
-  test("correct headertext is displayed", () => {
-    expect(screen.getByRole("heading")).toHaveTextContent(
+  test("correct heading text is displayed", () => {
+    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
       "Starred Consultants"
     );
   });
@@ -14,6 +14,7 @@ describe("StarredConsultants", () => {
     render(<StarredConsultants />);
 
     const headingElement = screen.getByRole("heading", {
+      level: 2,
       name: /Starred Consultants/i,
     });
 

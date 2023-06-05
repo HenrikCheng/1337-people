@@ -9,7 +9,7 @@ import useLocalstorage from "./hooks/useLocalStorage";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
 import EmployeeDisplay from "./components/EmployeeDisplay";
-import StarredConsultants from "./components/StarredConsultants";
+// import StarredConsultants from "./components/StarredConsultants";
 
 function App() {
   const fetcher = (url) =>

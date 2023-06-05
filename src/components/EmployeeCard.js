@@ -15,12 +15,12 @@ const EmployeeCard = ({ person }) => {
   const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
-    const movieFavourites = JSON.parse(
+    const selectedConsultant = JSON.parse(
       localStorage.getItem("favorite-consultants")
     );
 
-    if (movieFavourites) {
-      setFavourites(movieFavourites);
+    if (selectedConsultant) {
+      setFavourites(selectedConsultant);
     }
   }, []);
 
@@ -92,8 +92,8 @@ const EmployeeCard = ({ person }) => {
           <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
         )}
         <div
-          // style={{ minheight: "104 px" }}
-          className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4 h-[6.5rem]"
+          style={{ minheight: "104 px" }}
+          className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4"
         >
           <div className="flex flex-col items-start">
             <h4 className="whitespace-nowrap hyphens-auto font-semibold">

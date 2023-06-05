@@ -5,6 +5,7 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 const Loader = () => (
   <div
     role="status"
+    data-testid="loader-component"
     className="w-full h-screen flex items-start justify-center pt-20"
   >
     <FontAwesomeIcon icon={faGear} className="w-40 h-40 animate-spin" />
