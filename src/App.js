@@ -16,7 +16,7 @@ function App() {
     axios
       .get(url, {
         headers: {
-          Authorization: process.env.SECRET_API_KEY,
+          Authorization: process.env.REACT_APP_DEV_MODE_API,
         },
       })
       .then((res) => res.data);
@@ -26,6 +26,8 @@ function App() {
   const [showList, setShowList] = useState();
 
   // const [name, setName] = useLocalstorage("name", "");
+
+  console.log(process.env);
 
   const DisplayGrid = () => {
     if (error) {
