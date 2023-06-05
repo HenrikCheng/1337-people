@@ -1,12 +1,25 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import debounce from "lodash.debounce";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faTable, faX } from "@fortawesome/free-solid-svg-icons";
+import {
+  faList,
+  faTable,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 const FilterArea = ({ showList, setShowList }) => {
   const [searchParams, setSearchParams] = useSearchParams({});
+
+  const changeHandler = (e) => {
+    let updatedSearchParams = new URLSearchParams(searchParams.toString());
+    updatedSearchParams.set("q", e.target.value);
+    setSearchParams(updatedSearchParams.toString());
+  };
+
+  const debouncedOnChange = debounce(changeHandler, 500);
 
   return (
     <div className="flex flex-nowrap flex-col lg:flex-row justify-between items-start lg:items-center">
@@ -20,13 +33,7 @@ const FilterArea = ({ showList, setShowList }) => {
             id="nameInput"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
-            onChange={(e) => {
-              let updatedSearchParams = new URLSearchParams(
-                searchParams.toString()
-              );
-              updatedSearchParams.set("q", e.target.value);
-              setSearchParams(updatedSearchParams.toString());
-            }}
+            onChange={debouncedOnChange}
             defaultValue={
               searchParams.get("q") && searchParams.get("q").length > 1
                 ? searchParams.get("q")
@@ -41,7 +48,7 @@ const FilterArea = ({ showList, setShowList }) => {
                 document.getElementById("nameInput").value = "";
               }}
             >
-              <FontAwesomeIcon icon={faX} />
+              <FontAwesomeIcon icon={faCircleXmark} />
             </button>
           )}
         </label>
