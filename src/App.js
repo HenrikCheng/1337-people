@@ -30,35 +30,37 @@ function App() {
 
   // const [name, setName] = useLocalstorage("name", "");
 
+  const DisplayGrid = () => {
+    if (error) {
+      return (
+        <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
+          <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
+          <h2 className="bold">Oops, something went wrong.</h2>
+          <p>Try reloading the page...</p>
+        </div>
+      );
+    }
+
+    if (!data) return <Loader />;
+
+    return (
+      <EmployeeDisplay data={data} showList={showList} setShowList={showList} />
+    );
+  };
+
   return (
     <main className="bg-gray-100 p-4 sm:p-8 pt-10 min-h-screen">
       <h1 className="mb-4 text-4xl font-thin leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
         The fellowship of <span className="font-bold">Tretton37</span>
       </h1>
-      <StarredConsultants />
+      {/* <StarredConsultants /> */}
       {/* <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       /> */}
       <FilterArea showList={showList} setShowList={setShowList} />
-      {data ? (
-        <EmployeeDisplay
-          data={data}
-          showList={showList}
-          setShowList={showList}
-        />
-      ) : (
-        <Loader />
-      )}
-      {data && data.length === 0 && "No employees found"}
-      {error && (
-        <div className="bg-gray-100 p-4 pt-10 h-screen w-full flex flex-col items-center justify-center space-y-4">
-          <FontAwesomeIcon icon={faScrewdriverWrench} className="fa-2xl" />
-          <h2 className="bold">Oops, something went wrong.</h2>
-          <p>Try reloading the page...</p>
-        </div>
-      )}
+      <DisplayGrid />
     </main>
   );
 }

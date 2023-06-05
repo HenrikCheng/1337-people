@@ -44,6 +44,9 @@ const EmployeeDisplay = ({ data, showList }) => {
 
   const sortedData = sort ? filteredData.sort(sortOptions[sort]) : filteredData;
 
+  if (sortedData.length === 0)
+    return <div className="p-4 font-semibold">No employees found...</div>;
+
   if (sortedData)
     return (
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 lg:gap-6 py-4">
