@@ -33,7 +33,7 @@ const FilterArea = ({ showList, setShowList }) => {
                 : ""
             }
           />
-          {document.getElementById("nameInput").value && (
+          {searchParams.toString() && (
             <button
               className="absolute top-1/2 right-2"
               onClick={() => {
