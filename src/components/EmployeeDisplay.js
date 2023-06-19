@@ -24,10 +24,10 @@ const EmployeeDisplay = ({ data, showList }) => {
   });
 
   const sortOptions = {
-    nameAscending: (a, b) => a.name?.localeCompare(b.name) || 0,
-    nameDescending: (a, b) => b.name?.localeCompare(a.name) || 0,
-    officeDescending: (a, b) => b.office?.localeCompare(a.office) || 0,
-    officeAscending: (a, b) => a.office?.localeCompare(b.office) || 0,
+    nameAscending: (a, b) => b.name?.localeCompare(a.name) || 0,
+    nameDescending: (a, b) => a.name?.localeCompare(b.name) || 0,
+    officeDescending: (a, b) => a.office?.localeCompare(b.office) || 0,
+    officeAscending: (a, b) => b.office?.localeCompare(a.office) || 0,
   };
 
   const sortedData = sort ? filteredData.sort(sortOptions[sort]) : filteredData;
