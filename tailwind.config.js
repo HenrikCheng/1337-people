@@ -13,6 +13,9 @@ module.exports = {
           },
         },
       },
+      minHeight: {
+        104: "104px",
+      },
     },
   },
   plugins: [],

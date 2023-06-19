@@ -22,16 +22,16 @@ const EmployeeCard = ({ person }) => {
     if (selectedConsultant) {
       setFavourites(selectedConsultant);
     }
-  }, []);
+  }, [favourites]);
 
   const saveToLocalStorage = (items) => {
     localStorage.setItem("favorite-consultants", JSON.stringify(items));
   };
 
-  const addFavouriteConsultant = (movie) => {
-    let newFavouriteList = [...favourites, movie];
+  const addFavouriteConsultant = (consultant) => {
+    let newFavouriteList = [...favourites, consultant];
     favourites.forEach((element) => {
-      if (element === movie) {
+      if (element === consultant) {
         newFavouriteList = favourites;
       }
     });
@@ -39,9 +39,9 @@ const EmployeeCard = ({ person }) => {
     saveToLocalStorage(newFavouriteList);
   };
 
-  const removeFavouriteConsultant = (movie) => {
+  const removeFavouriteConsultant = (consultant) => {
     const newFavouriteList = favourites.filter(
-      (favourite) => favourite.name !== movie.name
+      (favourite) => favourite.name !== consultant.name
     );
 
     setFavourites(newFavouriteList);
@@ -53,8 +53,8 @@ const EmployeeCard = ({ person }) => {
       {open && <EmployeeModal person={person} open={open} setOpen={setOpen} />}
       <button
         onClick={(e) => {
-          addFavouriteConsultant(person);
           e.preventDefault();
+          addFavouriteConsultant(person);
         }}
         type="button"
       >
@@ -65,8 +65,8 @@ const EmployeeCard = ({ person }) => {
       </button>
       <button
         onClick={(e) => {
-          removeFavouriteConsultant(person);
           e.preventDefault();
+          removeFavouriteConsultant(person);
         }}
         type="button"
       >
@@ -91,10 +91,7 @@ const EmployeeCard = ({ person }) => {
         ) : (
           <FontAwesomeIcon icon={faUser} className="w-full h-auto bg-white" />
         )}
-        <div
-          style={{ minheight: "104 px" }}
-          className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4"
-        >
+        <div className="flex flex-col w-full lg:flex-row justify-between p-2 sm:p-4 min-h-104">
           <div className="flex flex-col items-start">
             <h4 className="whitespace-nowrap hyphens-auto font-semibold">
               {person.name}
