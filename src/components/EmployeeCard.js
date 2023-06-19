@@ -29,14 +29,15 @@ const EmployeeCard = ({ person }) => {
   };
 
   const addFavouriteConsultant = (consultant) => {
-    let newFavouriteList = [...favourites, consultant];
-    favourites.forEach((element) => {
-      if (element === consultant) {
-        newFavouriteList = favourites;
-      }
-    });
-    setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
+    const consultantExists = favourites.some(
+      (favorite) => favorite.name === consultant.name
+    );
+
+    if (!consultantExists) {
+      const newFavouriteList = [...favourites, consultant];
+      setFavourites(newFavouriteList);
+      saveToLocalStorage(newFavouriteList);
+    }
   };
 
   const removeFavouriteConsultant = (consultant) => {
