@@ -24,8 +24,7 @@ function App() {
 
   const [showList, setShowList] = useState();
 
-  const [name, setName] = useLocalstorage("favorite-consultants");
-  console.log("🚀 ~ file: App.js:29 ~ App ~ name:", name);
+  // const [name, setName] = useLocalstorage("favorite-consultants");
 
   console.log(process.env);
 
@@ -44,7 +43,7 @@ function App() {
 
     return (
       <div className="flex flex-col">
-        <EmployeeDisplay data={name} showList={showList} />
+        {/* <EmployeeDisplay data={name} showList={showList} /> */}
         <EmployeeDisplay data={data} showList={showList} shouldSort />
       </div>
     );

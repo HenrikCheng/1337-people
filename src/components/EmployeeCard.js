@@ -12,47 +12,47 @@ import EmployeeModal from "./EmployeeModal";
 
 const EmployeeCard = ({ person }) => {
   const [open, setOpen] = useState(false);
-  const [favourites, setFavourites] = useState([]);
+  // const [favourites, setFavourites] = useState([]);
 
-  useEffect(() => {
-    const selectedConsultant = JSON.parse(
-      localStorage.getItem("favorite-consultants")
-    );
+  // useEffect(() => {
+  //   const selectedConsultant = JSON.parse(
+  //     localStorage.getItem("favorite-consultants")
+  //   );
 
-    if (selectedConsultant) {
-      setFavourites(selectedConsultant);
-    }
-  }, [favourites]);
+  //   if (selectedConsultant) {
+  //     setFavourites(selectedConsultant);
+  //   }
+  // }, [favourites]);
 
-  const saveToLocalStorage = (items) => {
-    localStorage.setItem("favorite-consultants", JSON.stringify(items));
-  };
+  // const saveToLocalStorage = (items) => {
+  //   localStorage.setItem("favorite-consultants", JSON.stringify(items));
+  // };
 
-  const addFavouriteConsultant = (consultant) => {
-    const consultantExists = favourites.some(
-      (favorite) => favorite.name === consultant.name
-    );
+  // const addFavouriteConsultant = (consultant) => {
+  //   const consultantExists = favourites.some(
+  //     (favorite) => favorite.name === consultant.name
+  //   );
 
-    if (!consultantExists) {
-      const newFavouriteList = [...favourites, consultant];
-      setFavourites(newFavouriteList);
-      saveToLocalStorage(newFavouriteList);
-    }
-  };
+  //   if (!consultantExists) {
+  //     const newFavouriteList = [...favourites, consultant];
+  //     setFavourites(newFavouriteList);
+  //     saveToLocalStorage(newFavouriteList);
+  //   }
+  // };
 
-  const removeFavouriteConsultant = (consultant) => {
-    const newFavouriteList = favourites.filter(
-      (favourite) => favourite.name !== consultant.name
-    );
+  // const removeFavouriteConsultant = (consultant) => {
+  //   const newFavouriteList = favourites.filter(
+  //     (favourite) => favourite.name !== consultant.name
+  //   );
 
-    setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
-  };
+  //   setFavourites(newFavouriteList);
+  //   saveToLocalStorage(newFavouriteList);
+  // };
 
   return (
     <div className="relative">
       {open && <EmployeeModal person={person} open={open} setOpen={setOpen} />}
-      <button
+      {/* <button
         onClick={(e) => {
           e.preventDefault();
           addFavouriteConsultant(person);
@@ -75,7 +75,7 @@ const EmployeeCard = ({ person }) => {
           icon={faMinus}
           className="fa-xl hover:text-gray-500 absolute top-5 left-0 z-10 p-2"
         />
-      </button>
+      </button> */}
       <button
         type="button"
         onClick={() => setOpen(!open)}
