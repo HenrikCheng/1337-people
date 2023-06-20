@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 function getSavedValue(key, initialValue) {
-  const savedValue = JSON.parse(localStorage.getItem(key));
-  if (savedValue) return savedValue;
-  // If initialVal is a function, return what comes out of it
-  if (initialValue instanceof Function) return initialValue();
+  const savedValue = localStorage.getItem(key);
+  if (savedValue !== null) {
+    try {
+      return JSON.parse(savedValue);
+    } catch (error) {
+      console.error(`Error parsing JSON for key "${key}":`, error);
+    }
+  }
+
+  if (typeof initialValue === "function") {
+    return initialValue();
+  }
+
   return initialValue;
 }
 

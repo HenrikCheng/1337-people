@@ -9,7 +9,6 @@ import useLocalstorage from "./hooks/useLocalStorage";
 import FilterArea from "./components/FilterArea";
 import Loader from "./components/Loader";
 import EmployeeDisplay from "./components/EmployeeDisplay";
-// import StarredConsultants from "./components/StarredConsultants";
 
 function App() {
   const fetcher = (url) =>
@@ -25,7 +24,8 @@ function App() {
 
   const [showList, setShowList] = useState();
 
-  // const [name, setName] = useLocalstorage("name", "");
+  const [name, setName] = useLocalstorage("favorite-consultants");
+  console.log("🚀 ~ file: App.js:29 ~ App ~ name:", name);
 
   console.log(process.env);
 
@@ -43,7 +43,10 @@ function App() {
     if (!data) return <Loader />;
 
     return (
-      <EmployeeDisplay data={data} showList={showList} setShowList={showList} />
+      <div className="flex flex-col">
+        <EmployeeDisplay data={name} showList={showList} />
+        <EmployeeDisplay data={data} showList={showList} shouldSort />
+      </div>
     );
   };
 
