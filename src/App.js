@@ -24,10 +24,6 @@ function App() {
 
   const [showList, setShowList] = useState();
 
-  // const [name, setName] = useLocalstorage("favorite-consultants");
-
-  console.log(process.env);
-
   const DisplayGrid = () => {
     if (error) {
       return (
